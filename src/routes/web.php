@@ -9,12 +9,14 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/', [ItemController::class, 'index']);
 Route::get('/item/{item_id}', [ItemController::class, 'show']);
+Route::get('/sell', [SellController::class, 'create']);
+Route::get('/mypage', [MypageController::class, 'index']);
+Route::get('/mypage/profile', [ProfileController::class, 'edit']);
+Route::get('/purchase/{item_id}', [PurchaseController::class, 'create']);
+Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'address']);
+
 
 Route::middleware('auth')->group(function () {
-    Route::get('/purchase/{item_id}', [PurchaseController::class, 'create']);
-    Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'address']);
-    Route::get('/sell', [SellController::class, 'create']);
-    Route::get('/mypage', [MypageController::class, 'index']);
-    Route::get('/mypage/profile', [ProfileController::class, 'edit']);
+
 });
 
