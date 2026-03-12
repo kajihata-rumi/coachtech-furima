@@ -1,3 +1,5 @@
 ## ER図
 
-![ER図](docs/er.png)
+ER図ファイルは `docs/er.png` に配置しています。
+必要に応じて `docs` フォルダからご確認ください。
+編集元ファイルは `ER.drawio` です。
