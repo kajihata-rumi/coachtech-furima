@@ -1,0 +1,1 @@
+<h1>mypage index</h1>
