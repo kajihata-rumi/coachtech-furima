@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>coachtech-furima</title>
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+    @yield('css')
 </head>
 
 <body>
