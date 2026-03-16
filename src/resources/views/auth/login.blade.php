@@ -1,56 +1,61 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+<!DOCTYPE html>
+<html lang="ja">
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン</title>
+    <link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">
+</head>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+<body>
+    <div class="auth-page">
+        <div class="auth-header">
+            <div class="auth-header__logo">COACHTECH</div>
+        </div>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+        <div class="auth-container">
+            <h1 class="auth-title">ログイン</h1>
 
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
+            @if (session('status'))
+                <div class="auth-status">
+                    {{ session('status') }}
+                </div>
+            @endif
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
+            @if ($errors->any())
+                <div class="auth-error">
+                    <ul class="auth-error__list">
+                        @foreach ($errors->all() as $error)
+                            <li class="auth-error__item">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+            <form class="auth-form" method="POST" action="{{ route('login') }}" novalidate>
+                @csrf
 
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
+                <div class="auth-form__group">
+                    <label class="auth-form__label" for="email">メールアドレス</label>
+                    <input class="auth-form__input" id="email" type="email" name="email" value="{{ old('email') }}"
+                        required autofocus>
+                </div>
 
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
+                <div class="auth-form__group">
+                    <label class="auth-form__label" for="password">パスワード</label>
+                    <input class="auth-form__input" id="password" type="password" name="password" required
+                        autocomplete="current-password">
+                </div>
 
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
+                <button class="auth-form__button" type="submit">ログインする</button>
 
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+                <div class="auth-form__link-wrap">
+                    <a class="auth-form__link" href="{{ route('register') }}">会員登録はこちら</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
