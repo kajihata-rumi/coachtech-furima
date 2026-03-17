@@ -1,0 +1,94 @@
+.mypage {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 20px 0;
+}
+
+.mypage__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px 40px 80px;
+}
+
+.mypage__profile {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    margin-left: 150px;
+}
+
+.mypage__image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #d9d9d9;
+}
+
+.mypage__name {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.mypage__edit-button {
+    display: inline-block;
+    padding: 10px 55px;
+    border: 2px solid #ff5555;
+    border-radius: 10px;
+    color: #ff5555;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.mypage__tabs {
+    display: flex;
+    gap: 60px;
+    padding: 20px 0 10px;
+    border-bottom: 1px solid #5f5f5f;
+}
+
+.mypage__tab {
+    color: #5f5f5f;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.mypage__tab:first-child {
+    margin-left: 80px;
+}
+
+.mypage__tab--active {
+    color: #ff0000;
+}
+
+.mypage__items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 56px;
+    padding: 40px 0 0;
+}
+
+.mypage__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.mypage__item-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #d9d9d9;
+}
+
+.mypage__item-name {
+    margin: 8px 0 0;
+    font-size: 25px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.mypage__edit {
+    margin-right: 40px;
+}

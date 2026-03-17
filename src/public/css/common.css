@@ -19,20 +19,32 @@
     font-weight: 700;
 }
 
+.header__logo img {
+    display: block;
+        width: 400px;
+        height: auto;
+}
+
 .header__search {
     flex: 1;
     display: flex;
     justify-content: center;
+    margin: 0 20px;
+}
+
+.header__search form {
+    width: 100%;
+    max-width: 630px;
 }
 
 .header__search input {
     width: 100%;
-    max-width: 500px;
-    height: 40px;
+    height: 44px;
     padding: 0 16px;
     border: none;
     border-radius: 4px;
     font-size: 20px;
+    box-sizing: border-box;
 }
 
 .header__nav {
