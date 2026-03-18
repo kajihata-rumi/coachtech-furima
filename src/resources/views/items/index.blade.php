@@ -23,12 +23,12 @@
                 @forelse ($items as $item)
                     <article class="item-card">
                         <div class="item-card__image-wrapper">
-                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="item-card__image">
-
-                            @if ($item->purchase)
-                                <span class="item-card__sold">Sold</span>
-                            @endif
+                            <img src="{{ asset($item->image) }}" alt="{{ $item->name }}" class="item-card__image">
                         </div>
+
+                        @if ($item->purchase)
+                            <span class="item-card__sold">Sold</span>
+                        @endif
 
                         <p class="item-card__name">{{ $item->name }}</p>
                     </article>

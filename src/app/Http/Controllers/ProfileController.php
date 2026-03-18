@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Models\Purchase;
 
 class ProfileController extends Controller
 {
@@ -26,10 +28,25 @@ class ProfileController extends Controller
     return redirect()->route('profile.show');
     }
 
-    public function show()
-{
+    public function show(Request $request)
+    {
     $user = auth()->user();
-    return view('mypage.index', compact('user'));
-}
+    $page = $request->query('page', 'sell');
+
+    if ($page === 'buy') {
+        $items = Purchase::with('item')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->get()
+            ->pluck('item')
+            ->filter();
+    } else {
+        $items = Item::where('user_id', $user->id)
+            ->latest()
+            ->get();
+    }
+
+    return view('mypage.index', compact('user', 'page', 'items'));
+    }
 }
 
