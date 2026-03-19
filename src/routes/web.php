@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SellController;
 
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
 
@@ -15,6 +16,13 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/mypage/profile', [ProfileController::class, 'update'])
         ->name('profile.update');
+
+    Route::get('/sell', [SellController::class, 'create'])
+        ->name('sell.create');
+
+    Route::post('/sell', [SellController::class, 'store'])
+        ->name('sell.store');
 });
 
 require __DIR__.'/auth.php';
+

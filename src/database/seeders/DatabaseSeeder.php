@@ -8,7 +8,12 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+public function run()
     {
         User::create([
             'name' => 'testuser1',
@@ -24,6 +29,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             ItemSeeder::class,
+            PurchaseSeeder::class,
         ]);
     }
 }

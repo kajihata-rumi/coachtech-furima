@@ -23,6 +23,11 @@ class ProfileController extends Controller
     $user->address = $request->input('address');
     $user->building = $request->input('building');
 
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('profiles', 'public');
+        $user->image = $path;
+    }
+
     $user->save();
 
     return redirect()->route('profile.show');

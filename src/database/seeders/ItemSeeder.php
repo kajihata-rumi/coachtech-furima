@@ -17,7 +17,7 @@ class ItemSeeder extends Seeder
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
                 'price' => 15000,
                 'condition_id' => 1,
-                'image' => 'img/items/watch.jpg',
+                'image' => 'items/watch.jpg',
             ],
             [
                 'user_id' => 1,
@@ -26,7 +26,7 @@ class ItemSeeder extends Seeder
                 'description' => '高速で信頼性の高いハードディスク',
                 'price' => 5000,
                 'condition_id' => 2,
-                'image' => 'img/items/hdd.jpg',
+                'image' => 'items/hdd.jpg',
             ],
             [
                 'user_id' => 1,
@@ -35,7 +35,7 @@ class ItemSeeder extends Seeder
                 'description' => '新鮮な玉ねぎ3束のセット',
                 'price' => 300,
                 'condition_id' => 3,
-                'image' => 'img/items/onion.jpg',
+                'image' => 'items/onion.jpg',
             ],
             [
                 'user_id' => 1,
@@ -44,7 +44,7 @@ class ItemSeeder extends Seeder
                 'description' => 'クラシックなデザインの革靴',
                 'price' => 4000,
                 'condition_id' => 4,
-                'image' => 'img/items/shoes.jpg',
+                'image' => 'items/shoes.jpg',
             ],
             [
                 'user_id' => 1,
@@ -53,7 +53,7 @@ class ItemSeeder extends Seeder
                 'description' => '高性能なノートパソコン',
                 'price' => 45000,
                 'condition_id' => 1,
-                'image' => 'img/items/laptop.jpg',
+                'image' => 'items/laptop.jpg',
             ],
             [
                 'user_id' => 2,
@@ -62,7 +62,7 @@ class ItemSeeder extends Seeder
                 'description' => '高音質のレコーディング用マイク',
                 'price' => 8000,
                 'condition_id' => 2,
-                'image' => 'img/items/mic.jpg',
+                'image' => 'items/mic.jpg',
             ],
             [
                 'user_id' => 2,
@@ -71,7 +71,7 @@ class ItemSeeder extends Seeder
                 'description' => 'おしゃれなショルダーバッグ',
                 'price' => 3500,
                 'condition_id' => 3,
-                'image' => 'img/items/shoulder-bag.jpg',
+                'image' => 'items/shoulder-bag.jpg',
             ],
             [
                 'user_id' => 2,
@@ -80,7 +80,7 @@ class ItemSeeder extends Seeder
                 'description' => '使いやすいタンブラー',
                 'price' => 500,
                 'condition_id' => 4,
-                'image' => 'img/items/tumbler.jpg',
+                'image' => 'items/tumbler.jpg',
             ],
             [
                 'user_id' => 2,
@@ -89,7 +89,7 @@ class ItemSeeder extends Seeder
                 'description' => '手動のコーヒーミル',
                 'price' => 4000,
                 'condition_id' => 1,
-                'image' => 'img/items/coffee-mill.jpg',
+                'image' => 'items/coffee-mill.jpg',
             ],
             [
                 'user_id' => 2,
@@ -98,7 +98,7 @@ class ItemSeeder extends Seeder
                 'description' => '便利なメイクアップセット',
                 'price' => 2500,
                 'condition_id' => 2,
-                'image' => 'img/items/makeup-set.jpg',
+                'image' => 'items/makeup-set.jpg',
             ],
         ];
 

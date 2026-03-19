@@ -13,7 +13,12 @@
                 @csrf
 
                 <div class="profile-image">
-                    <div class="profile-image__preview"></div>
+                    <div class="profile-image__preview">
+                        @if (!empty(auth()->user()->image))
+                            <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="{{ auth()->user()->name }}"
+                                class="profile-image__img">
+                        @endif
+                    </div>
 
                     <div class="profile-image__button-area">
                         <label class="profile-image__button" for="image">画像を選択する</label>

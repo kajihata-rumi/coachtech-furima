@@ -8,7 +8,11 @@
     <div class="mypage">
         <div class="mypage__header">
             <div class="mypage__profile">
-                <div class="mypage__image"></div>
+                <div class="mypage__image">
+                    @if (!empty($user->image))
+                        <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}" class="mypage__image-img">
+                    @endif
+                </div>
                 <h1 class="mypage__name">{{ $user->name }}</h1>
             </div>
 
@@ -33,7 +37,7 @@
                 <div class="mypage__item">
                     <div class="mypage__item-image">
                         @if (!empty($item->image))
-                            <img src="{{ asset($item->image) }}" alt="{{ $item->name }}">
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="mypage__item-image">
                         @endif
                     </div>
                     <p class="mypage__item-name">{{ $item->name }}</p>

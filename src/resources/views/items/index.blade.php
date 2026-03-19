@@ -23,7 +23,7 @@
                 @forelse ($items as $item)
                     <article class="item-card">
                         <div class="item-card__image-wrapper">
-                            <img src="{{ asset($item->image) }}" alt="{{ $item->name }}" class="item-card__image">
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="item-card__image">
                         </div>
 
                         @if ($item->purchase)

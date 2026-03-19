@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration
             $table->integer('price');
             $table->unsignedBigInteger('condition_id');
             $table->string('image')->nullable();
+            $table->boolean('is_sold')->default(false);
             $table->timestamps();
         });
     }
