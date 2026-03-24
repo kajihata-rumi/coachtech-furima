@@ -22,16 +22,28 @@
 
             <div class="header__search">
                 <form action="/" method="GET">
+                    @if (request('tab') === 'mylist')
+                        <input type="hidden" name="tab" value="mylist">
+                    @endif
+
                     <input class="header__search_input" type="text" name="keyword" placeholder="なにをお探しですか？"
                         value="{{ request('keyword') }}">
                 </form>
             </div>
 
             <nav class="header__nav">
-                <a class="header__link" href="/logout"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    ログアウト
-                </a>
+                @auth
+                    <a class="header__link" href="/logout"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        ログアウト
+                    </a>
+                @endauth
+
+                @guest
+                    <a class="header__link" href="{{ route('login') }}">
+                        ログイン
+                    </a>
+                @endguest
 
                 <a class="header__link" href="/mypage">
                     マイページ

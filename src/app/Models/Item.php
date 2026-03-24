@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Condition;
+use App\Models\Like;
 
 class Item extends Model
 {

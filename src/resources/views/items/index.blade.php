@@ -31,9 +31,27 @@
                         @endif
 
                         <p class="item-card__name">{{ $item->name }}</p>
+
+                        @auth
+                            @if ($item->likes->contains('user_id', auth()->id()))
+                                <form action="{{ route('like.destroy', $item) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">いいね解除</button>
+                                </form>
+                            @else
+                                <form action="{{ route('like.store', $item) }}" method="POST">
+                                    @csrf
+                                    <button type="submit">いいね</button>
+                                </form>
+                            @endif
+                        @endauth
                     </article>
+
                 @empty
-                    <p class="item-index__empty">商品がありません</p>
+                    @if (!(auth()->guest() && $tab === 'mylist'))
+                        <p class="item-index__empty">商品がありません</p>
+                    @endif
                 @endforelse
             </div>
         </div>

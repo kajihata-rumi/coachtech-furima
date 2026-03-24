@@ -17,7 +17,7 @@ class ItemController extends Controller
             if (!Auth::check()) {
                 $items = collect();
             } else {
-                $items = Item::query()
+                $items = Item::query()->with(['purchase', 'likes'])
                     ->whereHas('likes', function ($query) {
                         $query->where('user_id', Auth::id());
                     })
@@ -28,7 +28,7 @@ class ItemController extends Controller
                     ->get();
             }
         } else {
-            $items = Item::query()
+            $items = Item::query()->with(['purchase', 'likes'])
                 ->when(Auth::check(), function ($query) {
                     $query->where('user_id', '!=', Auth::id());
                 })
