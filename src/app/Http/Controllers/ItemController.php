@@ -41,4 +41,16 @@ class ItemController extends Controller
 
         return view('items.index', compact('items', 'tab', 'keyword'));
     }
+
+    public function show($item_id)
+{
+    $item = Item::with([
+        'condition',
+        'categories',
+        'comments.user',
+        'likes',
+    ])->findOrFail($item_id);
+
+    return view('items.show', compact('item'));
+}
 }

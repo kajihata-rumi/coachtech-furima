@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-public function run()
+public function run(): void
     {
         User::create([
             'name' => 'testuser1',
@@ -28,7 +28,11 @@ public function run()
         ]);
 
         $this->call([
+            CategorySeeder::class,
+            ConditionSeeder::class,
             ItemSeeder::class,
+            ItemCategorySeeder::class,
+            CommentSeeder::class,
             PurchaseSeeder::class,
         ]);
     }

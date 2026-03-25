@@ -7,6 +7,7 @@ use App\Http\Controllers\SellController;
 use App\Http\Controllers\LikeController;
 
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
+Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/mypage', [ProfileController::class, 'show'])
@@ -26,9 +27,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/item/{item}/like', [LikeController::class, 'store'])
         ->name('like.store');
+
     Route::delete('/item/{item}/like', [LikeController::class, 'destroy'])
         ->name('like.destroy');
 });
 
 require __DIR__.'/auth.php';
-
