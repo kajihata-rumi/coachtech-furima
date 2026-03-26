@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/item/{item}/like', [LikeController::class, 'destroy'])
         ->name('like.destroy');
+
 });
 
 require __DIR__.'/auth.php';

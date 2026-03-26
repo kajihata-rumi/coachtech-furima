@@ -41,8 +41,10 @@
         })->filter()->values();
 
         $comments = collect(data_get($item, 'comments', []));
-        $likesCount = data_get($item, 'likes_count', 0);
+        $likes = collect(data_get($item, 'likes', []));
+        $likesCount = data_get($item, 'likes_count', $likes->count());
         $commentsCount = data_get($item, 'comments_count', $comments->count());
+        $isLikedByAuthUser = auth()->check() && $likes->contains('user_id', auth()->id());
 
         $heartIconUrl = asset('img/icon-heart-default.png');
         $commentIconUrl = asset('img/icon-comment.png');
@@ -83,7 +85,27 @@
 
                     <div class="item-detail__meta-icons">
                         <div class="item-detail__meta-item">
-                            <img src="{{ $heartIconUrl }}" alt="いいね" class="item-detail__icon-image">
+                            @auth
+                                @if ($isLikedByAuthUser)
+                                    <form action="{{ route('like.destroy', $item) }}" method="POST" class="item-detail__like-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="item-detail__like-button">
+                                            <img src="{{ $heartIconUrl }}" alt="いいね解除" class="item-detail__icon-image">
+                                        </button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('like.store', $item) }}" method="POST" class="item-detail__like-form">
+                                        @csrf
+                                        <button type="submit" class="item-detail__like-button">
+                                            <img src="{{ $heartIconUrl }}" alt="いいね" class="item-detail__icon-image">
+                                        </button>
+                                    </form>
+                                @endif
+                            @else
+                                <img src="{{ $heartIconUrl }}" alt="いいね" class="item-detail__icon-image">
+                            @endauth
+
                             <span class="item-detail__count">{{ $likesCount }}</span>
                         </div>
 

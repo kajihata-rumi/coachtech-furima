@@ -23,29 +23,21 @@
                 @forelse ($items as $item)
                     <article class="item-card">
                         <div class="item-card__image-wrapper">
-                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="item-card__image">
+                            <a href="{{ route('items.show', ['item_id' => $item->id]) }}" class="item-card__image-link">
+                                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
+                                    class="item-card__image">
+                            </a>
                         </div>
 
                         @if ($item->purchase)
                             <span class="item-card__sold">Sold</span>
                         @endif
 
-                        <p class="item-card__name">{{ $item->name }}</p>
-
-                        @auth
-                            @if ($item->likes->contains('user_id', auth()->id()))
-                                <form action="{{ route('like.destroy', $item) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">いいね解除</button>
-                                </form>
-                            @else
-                                <form action="{{ route('like.store', $item) }}" method="POST">
-                                    @csrf
-                                    <button type="submit">いいね</button>
-                                </form>
-                            @endif
-                        @endauth
+                        <p class="item-card__name">
+                            <a href="{{ route('items.show', ['item_id' => $item->id]) }}" class="item-card__name-link">
+                                {{ $item->name }}
+                            </a>
+                        </p>
                     </article>
 
                 @empty
