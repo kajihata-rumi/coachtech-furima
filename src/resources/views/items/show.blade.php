@@ -181,16 +181,25 @@
                     </div>
                 </section>
 
-                <section class="item-detail__section">
-                    <h2 class="item-detail__heading">商品へのコメント</h2>
+                @auth
+                    <section class="item-detail__section">
+                        <h2 class="item-detail__heading">商品へのコメント</h2>
 
-                    <div class="item-detail__comment-form">
-                        <textarea class="item-detail__textarea" name="content" rows="6">{{ old('content') }}</textarea>
+                        <form action="{{ route('comment.store', $item) }}" method="POST" class="item-detail__comment-form">
+                            @csrf
 
-                        <button type="button" class="item-detail__comment-button">
-                            コメントを送信する
-                        </button>
-                    </div>
+                            <textarea class="item-detail__textarea" name="content" rows="6"
+                                maxlength="255">{{ old('content') }}</textarea>
+
+                            @error('content')
+                                <p class="item-detail__error-message">{{ $message }}</p>
+                            @enderror
+
+                            <button type="submit" class="item-detail__comment-button">
+                                コメントを送信する
+                            </button>
+                        </form>
+                @endauth
                 </section>
             </div>
         </div>
