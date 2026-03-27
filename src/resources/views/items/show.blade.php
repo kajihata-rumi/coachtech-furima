@@ -61,6 +61,12 @@
         }
     @endphp
 
+    @if (session('error'))
+        <div class="item-detail__error-message">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <main class="item-detail">
         <div class="item-detail__inner">
             <div class="item-detail__left">
@@ -115,7 +121,13 @@
                         </div>
                     </div>
 
-                    <a href="#" class="item-detail__purchase-button">購入手続きへ</a>
+                    @if (!$item->purchase)
+                        <a href="{{ route('purchase.create', ['item_id' => $item->id]) }}" class="item-detail__purchase-button">
+                            購入手続きへ
+                        </a>
+                    @else
+                        <div class="item-detail__sold-label">Sold</div>
+                    @endif
                 </section>
 
                 <section class="item-detail__section">

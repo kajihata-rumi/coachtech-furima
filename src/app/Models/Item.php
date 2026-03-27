@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Condition;
 use App\Models\Like;
+use App\Models\Purchase;
 
 class Item extends Model
 {

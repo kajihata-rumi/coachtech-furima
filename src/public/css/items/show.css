@@ -419,3 +419,18 @@
     margin-top: 8px;
     margin-bottom: 4px;
 }
+
+.item-detail__error-message {
+    margin: 20px 0;
+    padding: 10px 15px;
+    background: #ffe0e0;
+    color: #cc0000;
+    border: 1px solid #ffb3b3;
+    border-radius: 4px;
+    font-size: 20px;
+}
+
+.item-detail__sold-label {
+    font-size: 16px;
+    font-weight: 700;
+}
