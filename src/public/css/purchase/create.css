@@ -1,0 +1,150 @@
+.purchase {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 60px 80px;
+}
+
+.purchase__inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 100px;
+}
+
+.purchase__left {
+    flex: 1;
+    max-width: 860px;
+    min-width: 0;
+}
+
+.purchase__right {
+    width: 408px;
+    flex-shrink: 0;
+}
+
+.purchase__item-card {
+    display: flex;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #000;
+}
+
+.purchase__item-image-box {
+    width: 180px;
+    height: 180px;
+    background: #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.purchase__item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.purchase__item-image-placeholder {
+    font-size: 14px;
+    color: #666;
+}
+
+.purchase__item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 16px;
+}
+
+.purchase__item-name {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.purchase__item-price {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 400;
+}
+
+.purchase__section {
+    padding: 32px 0;
+    border-bottom: 1px solid #000;
+}
+
+.purchase__section-title {
+    margin: 0 0 28px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.purchase__select-wrap {
+    padding-left: 28px;
+}
+
+.purchase__select {
+    width: 265px;
+    height: 31px;
+    font-size: 14px;
+}
+
+.purchase__address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.purchase__address-link {
+    font-size: 20px;
+    color: #0073cc;
+    text-decoration: none;
+}
+
+.purchase__address-body {
+    padding-left: 28px;
+}
+
+.purchase__address-postal,
+.purchase__address-text {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.purchase__summary {
+    border: 1px solid #000;
+}
+
+.purchase__summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 115px;
+    padding: 0 30px;
+    border-bottom: 1px solid #000;
+}
+
+.purchase__summary-row:last-child {
+    border-bottom: none;
+}
+
+.purchase__summary-label,
+.purchase__summary-value {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.purchase__button {
+    width: 100%;
+    height: 60px;
+    margin-top: 60px;
+    border: none;
+    border-radius: 4px;
+    background: #ff5555;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    cursor: pointer;
+}

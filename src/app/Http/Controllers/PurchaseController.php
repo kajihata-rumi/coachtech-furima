@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Item;
 
 class PurchaseController extends Controller
@@ -17,7 +16,15 @@ class PurchaseController extends Controller
                 ->with('error', '売り切れの商品です。');
         }
 
-        return view('purchase.create', compact('item'));
+        $user = auth()->user();
+
+        $shipping = [
+            'postal_code' => data_get($user, 'postal_code', ''),
+            'address' => data_get($user, 'address', ''),
+            'building' => data_get($user, 'building', ''),
+        ];
+
+        return view('purchase.create', compact('item', 'shipping'));
     }
 
     public function address($item_id)
@@ -30,6 +37,14 @@ class PurchaseController extends Controller
                 ->with('error', '売り切れの商品です。');
         }
 
-        return view('purchase.address', compact('item'));
+        $user = auth()->user();
+
+        $shipping = [
+            'postal_code' => data_get($user, 'postal_code', ''),
+            'address' => data_get($user, 'address', ''),
+            'building' => data_get($user, 'building', ''),
+        ];
+
+        return view('purchase.address', compact('item', 'shipping'));
     }
 }
