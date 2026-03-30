@@ -33,14 +33,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/item/{item}/like', [LikeController::class, 'destroy'])
         ->name('like.destroy');
 
-        Route::get('/purchase/{item_id}', [PurchaseController::class, 'create'])
+        Route::get('/purchase/success', [PurchaseController::class, 'success'])
+    ->name('purchase.success');
+
+        Route::get('/purchase/{item}', [PurchaseController::class, 'create'])
     ->name('purchase.create');
 
-    Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'address'])
+    Route::get('/purchase/address/{item}', [PurchaseController::class, 'address'])
     ->name('purchase.address');
 
     Route::post('/item/{item}/comment', [CommentController::class, 'store'])
     ->name('comment.store');
+
+    Route::post('/purchase/{item}/checkout', [PurchaseController::class, 'checkout'])
+    ->name('purchase.checkout');
+
+Route::get('/purchase/cancel/{item}', [PurchaseController::class, 'cancel'])
+    ->name('purchase.cancel');
 });
 
 require __DIR__.'/auth.php';

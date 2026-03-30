@@ -122,7 +122,7 @@
                     </div>
 
                     @if (!$item->purchase)
-                        <a href="{{ route('purchase.create', ['item_id' => $item->id]) }}" class="item-detail__purchase-button">
+                        <a href="{{ route('purchase.create', ['item' => $item->id]) }}" class="item-detail__purchase-button">
                             購入手続きへ
                         </a>
                     @else
