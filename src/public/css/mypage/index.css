@@ -115,3 +115,15 @@
     font-size: 24px;
     margin: 40px 0 0 80px;
 }
+
+.mypage__success-message {
+    width: 100%;
+    margin: 0 0 24px 0;
+    padding: 18px 20px;
+    background: #e8f7e9;
+    border: 1px solid #9ed8a1;
+    color: #2f7d32;
+    font-size: 20px;
+    font-weight: 700;
+    box-sizing: border-box;
+}

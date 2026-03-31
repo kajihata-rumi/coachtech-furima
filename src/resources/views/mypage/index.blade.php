@@ -5,6 +5,13 @@
 @endsection
 
 @section('content')
+
+    @if (session('success'))
+        <p class="mypage__success-message">
+            {{ session('success') }}
+        </p>
+    @endif
+
     <div class="mypage">
         <div class="mypage__header">
             <div class="mypage__profile">

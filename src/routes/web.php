@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/purchase/address/{item}', [PurchaseController::class, 'address'])
     ->name('purchase.address');
 
+    Route::post('/purchase/address/{item}', [PurchaseController::class, 'updateAddress'])
+    ->name('purchase.address.update');
+
     Route::post('/item/{item}/comment', [CommentController::class, 'store'])
     ->name('comment.store');
 

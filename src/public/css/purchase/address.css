@@ -1,0 +1,59 @@
+.purchase-address {
+    max-width: 680px;
+    margin: 60px auto 0;
+    padding-bottom: 80px;
+}
+
+.purchase-address__title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 70px;
+}
+
+.purchase-address__form {
+    width: 100%;
+}
+
+.purchase-address__group {
+    margin-bottom: 48px;
+}
+
+.purchase-address__label {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.purchase-address__input {
+    width: 100%;
+    height: 45px;
+    padding: 0 12px;
+    border: 1px solid #5f5f5f;
+    border-radius: 4px;
+    background: #ffffff;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+.purchase-address__error {
+    color: #ff5555;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.purchase-address__button {
+    display: block;
+    width: 100%;
+    max-width: 680px;
+    height: 56px;
+    margin: 70px auto 0;
+    border: none;
+    border-radius: 4px;
+    background: #ff6b6b;
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    cursor: pointer;
+}
