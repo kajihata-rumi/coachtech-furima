@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Item;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
-use Stripe\Checkout\Session;
+use Illuminate\Support\Facades\Auth;
 use Stripe\Stripe;
+use App\Models\Item;
+use Stripe\Checkout\Session;
 
 class PurchaseController extends Controller
 {
@@ -87,10 +88,14 @@ if (empty(config('services.stripe.secret'))) {
         ]],
         'success_url' => route('purchase.success') . '?session_id={CHECKOUT_SESSION_ID}',
         'cancel_url' => route('purchase.cancel', ['item' => $item->id]),
+
         'metadata' => [
-            'item_id' => $item->id,
-            'user_id' => auth()->id(),
-            'payment_method' => $paymentMethod,
+        'item_id' => $item->id,
+        'user_id' => auth()->id(),
+        'payment_method' => $paymentMethod,
+        'postal_code' => data_get(auth()->user(), 'postal_code', ''),
+        'address' => data_get(auth()->user(), 'address', ''),
+        'building' => data_get(auth()->user(), 'building', ''),
         ],
     ];
 
@@ -113,8 +118,25 @@ if (empty(config('services.stripe.secret'))) {
     return redirect($session->url);
 }
 
-public function success()
+public function success(Request $request)
 {
+    Stripe::setApiKey(config('services.stripe.secret'));
+
+    $checkoutSession = Session::retrieve($request->session_id);
+    $itemId = $checkoutSession->metadata->item_id;
+
+    if (!Purchase::where('item_id', $itemId)->exists()) {
+        Purchase::create([
+            'user_id' => $checkoutSession->metadata->user_id,
+            'item_id' => $itemId,
+            'payment_method' => $checkoutSession->metadata->payment_method,
+            'postal_code' => data_get($checkoutSession->metadata, 'postal_code', ''),
+            'address' => data_get($checkoutSession->metadata, 'address', ''),
+            'building' => data_get($checkoutSession->metadata, 'building', ''),
+            'purchased_at' => now(),
+        ]);
+    }
+
     return view('purchase.success');
 }
 
