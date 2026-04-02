@@ -16,10 +16,12 @@ Route::middleware('auth')->group(function () {
         ->name('profile.show');
 
     Route::get('/mypage/profile', [ProfileController::class, 'edit'])
-        ->name('profile.edit');
+    ->middleware('verified')
+    ->name('profile.edit');
 
-    Route::post('/mypage/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
+Route::post('/mypage/profile', [ProfileController::class, 'update'])
+    ->middleware('verified')
+    ->name('profile.update');
 
     Route::get('/sell', [SellController::class, 'create'])
         ->name('sell.create');

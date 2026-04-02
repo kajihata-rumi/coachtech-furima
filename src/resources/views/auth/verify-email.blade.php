@@ -1,39 +1,35 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.app')
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-        </div>
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/auth/verify-email.css') }}">
+@endsection
 
-        @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+@section('content')
+    <div class="verify-email">
+        <div class="verify-email__content">
+            <p class="verify-email__message">
+                登録していただいたメールアドレスに認証メールを送付しました。<br>
+                メール認証を完了してください。
+            </p>
+
+            <div class="verify-email__button-wrap">
+                <a href="http://localhost:8025" target="_blank" rel="noopener noreferrer" class="verify-email__button">
+                    認証はこちらから
+                </a>
             </div>
-        @endif
 
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
+            @if (session('status') === 'verification-link-sent')
+                <p class="verify-email__status">
+                    認証メールを再送しました。
+                </p>
+            @endif
+
+            <form method="POST" action="{{ route('verification.send') }}" class="verify-email__resend-form">
                 @csrf
-
-                <div>
-                    <x-button>
-                        {{ __('Resend Verification Email') }}
-                    </x-button>
-                </div>
-            </form>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
+                <button type="submit" class="verify-email__resend">
+                    認証メールを再送する
                 </button>
             </form>
         </div>
-    </x-auth-card>
-</x-guest-layout>
+    </div>
+@endsection

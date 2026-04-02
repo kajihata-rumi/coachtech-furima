@@ -33,10 +33,10 @@
 
             <nav class="header__nav">
                 @auth
-                    <a class="header__link" href="/logout"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        ログアウト
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST" class="header__logout-form">
+                        @csrf
+                        <button type="submit" class="header__link header__logout-button">ログアウト</button>
+                    </form>
                 @endauth
 
                 @guest
@@ -54,9 +54,6 @@
                 </a>
             </nav>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
         </div>
     </header>
 
