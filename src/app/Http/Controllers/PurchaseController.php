@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Stripe\Stripe;
 use App\Models\Item;
 use Stripe\Checkout\Session;
+use App\Http\Requests\Auth\AddressRequest;
+use App\Http\Requests\Auth\PurchaseRequest;
 
 class PurchaseController extends Controller
 {
@@ -36,100 +38,90 @@ class PurchaseController extends Controller
         return view('purchase.address', compact('item', 'shipping'));
     }
 
-    public function updateAddress(Request $request, Item $item)
-    {
-        $request->validate([
-            'postal_code' => ['required', 'regex:/^\d{3}-\d{4}$/'],
-            'address' => ['required', 'string', 'max:255'],
-            'building' => ['nullable', 'string', 'max:255'],
-        ]);
+    public function updateAddress(AddressRequest $request, Item $item)
+{
+    session([
+        'purchase_shipping.' . $item->id => [
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+            'building' => $request->building,
+        ]
+    ]);
 
-        session([
-            'purchase_shipping.' . $item->id => [
-                'postal_code' => $request->postal_code,
-                'address' => $request->address,
-                'building' => $request->building,
-            ]
-        ]);
+    return redirect()
+        ->route('purchase.create', ['item' => $item->id])
+        ->with('success', '配送先を更新しました。');
+}
 
+public function checkout(PurchaseRequest $request, Item $item)
+{
+    if ($item->purchase) {
+        return redirect()
+            ->route('items.show', ['item_id' => $item->id])
+            ->with('error', '売り切れの商品です。');
+    }
+
+    if ($item->user_id === auth()->id()) {
+        return redirect()
+            ->route('items.show', ['item_id' => $item->id])
+            ->with('error', '自分の商品は購入できません。');
+    }
+
+    if (empty(config('services.stripe.secret'))) {
         return redirect()
             ->route('purchase.create', ['item' => $item->id])
-            ->with('success', '配送先を更新しました。');
+            ->with('error', 'Stripeの設定が未完了のため、現在決済機能を確認できません。');
     }
 
-    public function checkout(Request $request, Item $item)
-    {
-        $request->validate([
-            'payment_method' => ['required', 'in:konbini,card'],
-        ]);
+    Stripe::setApiKey(config('services.stripe.secret'));
 
-        if ($item->purchase) {
-            return redirect()
-                ->route('items.show', ['item_id' => $item->id])
-                ->with('error', '売り切れの商品です。');
-        }
+    $paymentMethod = $request->payment_method;
+    $shipping = $this->getShippingAddress($item);
 
-        if ($item->user_id === auth()->id()) {
-            return redirect()
-                ->route('items.show', ['item_id' => $item->id])
-                ->with('error', '自分の商品は購入できません。');
-        }
-
-        if (empty(config('services.stripe.secret'))) {
-            return redirect()
-                ->route('purchase.create', ['item' => $item->id])
-                ->with('error', 'Stripeの設定が未完了のため、現在決済機能を確認できません。');
-        }
-        Stripe::setApiKey(config('services.stripe.secret'));
-
-        $paymentMethod = $request->payment_method;
-        $shipping = $this->getShippingAddress($item);
-
-        $sessionParams = [
-            'mode' => 'payment',
-            'line_items' => [
-                [
-                    'price_data' => [
-                        'currency' => 'jpy',
-                        'product_data' => [
-                            'name' => $item->name,
-                        ],
-                        'unit_amount' => $item->price,
+    $sessionParams = [
+        'mode' => 'payment',
+        'line_items' => [
+            [
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'product_data' => [
+                        'name' => $item->name,
                     ],
-                    'quantity' => 1,
-                ]
+                    'unit_amount' => $item->price,
+                ],
+                'quantity' => 1,
             ],
-            'success_url' => route('purchase.success') . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('purchase.cancel', ['item' => $item->id]),
+        ],
+        'success_url' => route('purchase.success') . '?session_id={CHECKOUT_SESSION_ID}',
+        'cancel_url' => route('purchase.cancel', ['item' => $item->id]),
+        'metadata' => [
+            'item_id' => $item->id,
+            'user_id' => auth()->id(),
+            'payment_method' => $paymentMethod,
+            'postal_code' => $shipping['postal_code'],
+            'address' => $shipping['address'],
+            'building' => $shipping['building'],
+        ],
+    ];
 
-            'metadata' => [
-                'item_id' => $item->id,
-                'user_id' => auth()->id(),
-                'payment_method' => $paymentMethod,
-                'postal_code' => $shipping['postal_code'],
-                'address' => $shipping['address'],
-                'building' => $shipping['building'],
+    if ($paymentMethod === 'card') {
+        $sessionParams['payment_method_types'] = ['card'];
+    }
+
+    if ($paymentMethod === 'konbini') {
+        $sessionParams['payment_method_types'] = ['konbini'];
+        $sessionParams['payment_method_options'] = [
+            'konbini' => [
+                'expires_after_days' => 3,
             ],
         ];
-
-        if ($paymentMethod === 'card') {
-            $sessionParams['payment_method_types'] = ['card'];
-        }
-
-        if ($paymentMethod === 'konbini') {
-            $sessionParams['payment_method_types'] = ['konbini'];
-            $sessionParams['payment_method_options'] = [
-                'konbini' => [
-                    'expires_after_days' => 3,
-                ],
-            ];
-            $sessionParams['customer_email'] = auth()->user()->email;
-        }
-
-        $session = Session::create($sessionParams);
-
-        return redirect($session->url);
+        $sessionParams['customer_email'] = auth()->user()->email;
     }
+
+    $session = Session::create($sessionParams);
+
+    return redirect($session->url);
+}
 
     public function success(Request $request)
     {

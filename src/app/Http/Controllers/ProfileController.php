@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Purchase;
+use App\Http\Requests\Auth\ProfileRequest;
 
 class ProfileController extends Controller
 {
@@ -13,9 +14,9 @@ class ProfileController extends Controller
         return view('mypage.profile');
     }
 
-    public function update(Request $request)
-    {
-/** @var \App\Models\User $user */
+    public function update(ProfileRequest $request)
+{
+    /** @var \App\Models\User $user */
     $user = auth()->user();
 
     $user->name = $request->input('name');
@@ -31,8 +32,7 @@ class ProfileController extends Controller
     $user->save();
 
     return redirect()->route('profile.show');
-    }
-
+}
     public function show(Request $request)
     {
     $user = auth()->user();

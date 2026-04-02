@@ -23,6 +23,9 @@
                     <div class="profile-image__button-area">
                         <label class="profile-image__button" for="image">画像を選択する</label>
                         <input class="profile-image__input" type="file" id="image" name="image">
+                        @error('image')
+                            <p class="profile-form__error">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
 
@@ -30,24 +33,36 @@
                     <label class="profile-form__label" for="name">ユーザー名</label>
                     <input class="profile-form__input" type="text" id="name" name="name"
                         value="{{ old('name', auth()->user()->name) }}">
+                    @error('name')
+                        <p class="profile-form__error">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="profile-form__group">
                     <label class="profile-form__label" for="postal_code">郵便番号</label>
                     <input class="profile-form__input" type="text" id="postal_code" name="postal_code"
                         value="{{ old('postal_code', auth()->user()->postal_code) }}">
+                    @error('postal_code')
+                        <p class="profile-form__error">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="profile-form__group">
                     <label class="profile-form__label" for="address">住所</label>
                     <input class="profile-form__input" type="text" id="address" name="address"
                         value="{{ old('address', auth()->user()->address) }}">
+                    @error('address')
+                        <p class="profile-form__error">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="profile-form__group">
                     <label class="profile-form__label" for="building">建物名</label>
                     <input class="profile-form__input" type="text" id="building" name="building"
                         value="{{ old('building', auth()->user()->building) }}">
+                    @error('building')
+                        <p class="profile-form__error">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="profile-form__button">

@@ -100,3 +100,10 @@
     font-weight: 700;
     cursor: pointer;
 }
+
+.profile-form__error {
+    margin-top: 8px;
+    color: #ff5555;
+    font-size: 14px;
+    font-weight: 700;
+}
