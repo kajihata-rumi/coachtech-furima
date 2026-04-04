@@ -1,25 +1,23 @@
 .item-detail {
     width: 100%;
-    max-width: 1380px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 105px 56px 100px;
+    padding: 80px 40px 100px;
     box-sizing: border-box;
 }
 
 .item-detail__inner {
     display: grid;
-    grid-template-columns: 48% 44%;
+    grid-template-columns: minmax(0, 48%) minmax(0, 44%);
     justify-content: space-between;
     align-items: start;
     column-gap: 40px;
 }
 
-.item-detail__left {
-    width: 100%;
-}
-
+.item-detail__left,
 .item-detail__right {
     width: 100%;
+    min-width: 0;
 }
 
 .item-detail__image-box {

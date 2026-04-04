@@ -19,4 +19,16 @@ class AddressRequest extends FormRequest
             'building' => ['nullable', 'string', 'max:255'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'postal_code.required' => '郵便番号を入力してください。',
+            'address.required' => '住所を入力してください。',
+            'postal_code.regex' => '郵便番号はハイフンあり8文字で入力してください。',
+        ];
+    }
 }
+
+
+

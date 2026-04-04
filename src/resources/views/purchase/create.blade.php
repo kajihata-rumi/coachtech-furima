@@ -58,6 +58,9 @@
                                 <option value="card">カード支払い</option>
                             </select>
                         </div>
+                        @error('payment_method')
+                            <p class="purchase__error-message">{{ $message }}</p>
+                        @enderror
                     </section>
 
                     <section class="purchase__section">
@@ -67,6 +70,10 @@
                                 変更する
                             </a>
                         </div>
+
+                        @if ($errors->has('postal_code') || $errors->has('address'))
+                            <p class="purchase__error-message">配送先を設定してください。</p>
+                        @endif
 
                         <div class="purchase__address-body">
                             <p class="purchase__address-postal">
@@ -95,6 +102,9 @@
                             <span class="purchase__summary-value"
                                 id="payment_method_display">{{ $paymentMethodLabel }}</span>
                         </div>
+
+                        <input type="hidden" name="postal_code" value="{{ $postalCode }}">
+                        <input type="hidden" name="address" value="{{ $address }}">
                     </div>
 
                     <button type="submit" class="purchase__button">購入する</button>

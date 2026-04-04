@@ -105,3 +105,10 @@
 .auth-form__link:hover {
     text-decoration: underline;
 }
+
+.auth__error-message {
+    margin-top: 8px;
+    color: #ff5555;
+    font-size: 20px;
+    font-weight: 700;
+}

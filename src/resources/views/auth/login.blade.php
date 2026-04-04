@@ -23,16 +23,6 @@
                 </div>
             @endif
 
-            @if ($errors->any())
-                <div class="auth-error">
-                    <ul class="auth-error__list">
-                        @foreach ($errors->all() as $error)
-                            <li class="auth-error__item">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <form class="auth-form" method="POST" action="{{ route('login') }}" novalidate>
                 @csrf
 
@@ -40,12 +30,18 @@
                     <label class="auth-form__label" for="email">メールアドレス</label>
                     <input class="auth-form__input" id="email" type="email" name="email" value="{{ old('email') }}"
                         required autofocus>
+                    @error('email')
+                        <p class="auth__error-message">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="auth-form__group">
                     <label class="auth-form__label" for="password">パスワード</label>
                     <input class="auth-form__input" id="password" type="password" name="password" required
                         autocomplete="current-password">
+                    @error('password')
+                        <p class="auth__error-message">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <button class="auth-form__button" type="submit">ログインする</button>
