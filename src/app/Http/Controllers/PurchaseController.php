@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Stripe\Stripe;
 use App\Models\Item;
 use Stripe\Checkout\Session;
@@ -70,7 +69,7 @@ public function checkout(PurchaseRequest $request, Item $item)
     if (empty(config('services.stripe.secret'))) {
         return redirect()
             ->route('purchase.create', ['item' => $item->id])
-            ->with('error', 'Stripeの設定が未完了のため、現在決済機能を確認できません。');
+            ->with('error', 'Stripeの設定が未完了のため、決済を開始できません。');
     }
 
     Stripe::setApiKey(config('services.stripe.secret'));
@@ -120,6 +119,17 @@ public function checkout(PurchaseRequest $request, Item $item)
 
     $session = Session::create($sessionParams);
 
+    if ($paymentMethod === 'konbini' && !Purchase::where('item_id', $item->id)->exists()) {
+    Purchase::create([
+        'user_id' => auth()->id(),
+        'item_id' => $item->id,
+        'payment_method' => $paymentMethod,
+        'postal_code' => $shipping['postal_code'] ?? '',
+        'address' => $shipping['address'] ?? '',
+        'building' => $shipping['building'] ?? '',
+        'purchased_at' => now(),
+    ]);
+}
     return redirect($session->url);
 }
 
@@ -143,7 +153,7 @@ public function checkout(PurchaseRequest $request, Item $item)
         }
 
         session()->forget('purchase_shipping.' . $itemId);
-        return redirect('/mypage?page=buy')
+        return redirect()->route('items.index')
             ->with('success', '購入が完了しました。');
     }
 

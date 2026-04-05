@@ -5,6 +5,13 @@
 @endsection
 
 @section('content')
+
+    @if (session('success'))
+        <p class="item-index__success-message">
+            {{ session('success') }}
+        </p>
+    @endif
+
     <div class="item-index">
         <div class="item-index__tabs">
             <a href="{{ url('/') . '?tab=recommend&keyword=' . request('keyword') }}"
