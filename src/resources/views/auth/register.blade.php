@@ -11,7 +11,9 @@
 <body>
     <div class="auth-page">
         <div class="auth-header">
-            <div class="auth-header__logo">COACHTECH</div>
+            <div class="auth-header__logo">
+                <img src="{{ asset('img/logo.png') }}" alt="COACHTECH">
+            </div>
         </div>
 
         <div class="auth-container">
@@ -42,18 +44,18 @@
                     <label class="auth-form__label" for="password">パスワード</label>
                     <input class="auth-form__input" id="password" type="password" name="password" required
                         autocomplete="new-password">
-                    @error('password')
-                        <p class="auth__error-message">{{ $message }}</p>
-                    @enderror
+                    @if ($errors->has('password') && $errors->first('password') !== 'パスワードと一致しません')
+                        <p class="auth__error-message">{{ $errors->first('password') }}</p>
+                    @endif
                 </div>
 
                 <div class="auth-form__group">
                     <label class="auth-form__label" for="password_confirmation">確認用パスワード</label>
                     <input class="auth-form__input" id="password_confirmation" type="password"
                         name="password_confirmation" required>
-                    @error('password_confirmation')
-                        <p class="auth__error-message">{{ $message }}</p>
-                    @enderror
+                    @if ($errors->has('password') && $errors->first('password') === 'パスワードと一致しません')
+                        <p class="auth__error-message">{{ $errors->first('password') }}</p>
+                    @endif
                 </div>
                 <button class="auth-form__button" type="submit">登録する</button>
                 <div class="auth-form__link-wrap">

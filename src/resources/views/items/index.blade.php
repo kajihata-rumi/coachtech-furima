@@ -31,14 +31,13 @@
                     <article class="item-card">
                         <div class="item-card__image-wrapper">
                             <a href="{{ route('items.show', ['item_id' => $item->id]) }}" class="item-card__image-link">
+                                @if ($item->purchase)
+                                    <span class="item-card__sold">Sold</span>
+                                @endif
                                 <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
                                     class="item-card__image">
                             </a>
                         </div>
-
-                        @if ($item->purchase)
-                            <span class="item-card__sold">Sold</span>
-                        @endif
 
                         <p class="item-card__name">
                             <a href="{{ route('items.show', ['item_id' => $item->id]) }}" class="item-card__name-link">

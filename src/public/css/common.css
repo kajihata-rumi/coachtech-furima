@@ -1,16 +1,16 @@
 .header {
     background: #000;
-    padding: 16px 24px;
+    padding: 16px 16px;
 }
 
 .header__inner {
-    max-width: 1540px;
+    max-width: 1512px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
-    padding: 0 20px
+    gap: 16px;
+    padding: 0 12px
 }
 
 .header__logo a {
@@ -22,15 +22,16 @@
 
 .header__logo img {
     display: block;
-    width: 400px;
+    width: 355px;
     height: auto;
 }
 
 .header__search {
     flex: 1;
+    min-width: 0;
     display: flex;
     justify-content: center;
-    margin: 0 20px;
+    margin: 0 8px;
 }
 
 .header__search form {
@@ -51,7 +52,8 @@
 .header__nav {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
+    flex-shrink: 0;
 }
 
 .header__link,
@@ -62,8 +64,8 @@
     padding: 0;
     color: #fff;
     text-decoration: none;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 25px;
+    font-weight: 500;
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;
@@ -89,9 +91,9 @@
     background: #fff;
     color: #000;
     text-decoration: none;
-    font-size: 24px;
-    font-weight: 700;
-    padding: 8px 20px;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 22px;
     border-radius: 4px;
     white-space: nowrap;
 }

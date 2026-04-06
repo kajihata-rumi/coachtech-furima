@@ -11,7 +11,9 @@
 <body>
     <div class="auth-page">
         <div class="auth-header">
-            <div class="auth-header__logo">COACHTECH</div>
+            <div class="auth-header__logo">
+                <img src="{{ asset('img/logo.png') }}" alt="COACHTECH">
+            </div>
         </div>
 
         <div class="auth-container">
