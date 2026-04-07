@@ -46,7 +46,10 @@
         $commentsCount = data_get($item, 'comments_count', $comments->count());
         $isLikedByAuthUser = auth()->check() && $likes->contains('user_id', auth()->id());
 
-        $heartIconUrl = asset('img/icon-heart-default.png');
+        $heartIconUrl = $isLikedByAuthUser
+            ? asset('img/icon-heart-pink.png')
+            : asset('img/icon-heart-default.png');
+
         $commentIconUrl = asset('img/icon-comment.png');
 
         $imageUrl = '';
@@ -181,25 +184,25 @@
                     </div>
                 </section>
 
-                @auth
-                    <section class="item-detail__section">
-                        <h2 class="item-detail__heading">商品へのコメント</h2>
 
-                        <form action="{{ route('comment.store', $item) }}" method="POST" class="item-detail__comment-form">
-                            @csrf
+                <section class="item-detail__section">
+                    <h2 class="item-detail__heading">商品へのコメント</h2>
 
-                            <textarea class="item-detail__textarea" name="content" rows="6"
-                                maxlength="255">{{ old('content') }}</textarea>
+                    <form action="{{ route('comment.store', $item) }}" method="POST" class="item-detail__comment-form">
+                        @csrf
 
-                            @error('content')
-                                <p class="item-detail__error-message">{{ $message }}</p>
-                            @enderror
+                        <textarea class="item-detail__textarea" name="content" rows="6"
+                            maxlength="255">{{ old('content') }}</textarea>
 
-                            <button type="submit" class="item-detail__comment-button">
-                                コメントを送信する
-                            </button>
-                        </form>
-                @endauth
+                        @error('content')
+                            <p class="item-detail__error-message">{{ $message }}</p>
+                        @enderror
+
+                        <button type="submit" class="item-detail__comment-button">
+                            コメントを送信する
+                        </button>
+                    </form>
+
                 </section>
             </div>
         </div>

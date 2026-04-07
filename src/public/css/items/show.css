@@ -89,6 +89,7 @@
     width: 36px;
     height: 36px;
     object-fit: contain;
+    filter: brightness(1.05) saturate(1.1);
 }
 
 .item-detail__count {
