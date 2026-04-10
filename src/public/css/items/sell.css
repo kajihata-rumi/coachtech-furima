@@ -1,13 +1,13 @@
 .sell-form {
-    max-width: 770px;
+    max-width: 700px;
     margin: 0 auto;
     padding: 40px 20px 80px;
 }
 
 .sell-form__title {
-    font-size: 32px;
+    font-size: 35px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin: 0 20px;
     text-align: center;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .sell-form__section-title {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
     margin-bottom: 24px;
     padding-bottom: 8px;
@@ -29,7 +29,7 @@
 
 .sell-form__label {
     display: block;
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 700;
     margin-bottom: 8px;
 }
@@ -75,7 +75,7 @@
 
 .form__error {
     color: #ff5555;
-    font-size: 14px;
+    font-size: 18px;
     margin-top: 4px;
 }
 
@@ -93,10 +93,10 @@
 .sell-form__image-button {
     display: inline-block;
     padding: 8px 16px;
-    border: 1px solid #ff6b6b;
-    border-radius: 8px;
+    border: 2px solid #ff6b6b;
+    border-radius: 10px;
     color: #ff6b6b;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 700;
     background-color: #fff;
     cursor: pointer;
@@ -113,7 +113,7 @@
     border-radius: 5px;
     background-color: #ff5555;
     color: #fff;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
     cursor: pointer;
 }
@@ -138,7 +138,7 @@
 .sell-form__category-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 10px;
+    gap: 10px 13px;
 }
 
 .sell-form__category-item {
@@ -151,8 +151,9 @@
 
 .sell-form__category-text {
     display: inline-block;
-    padding: 7px 30px;
-    border: 1px solid #ff6b6b;
+    margin-top: 18px;
+    padding: 8px 22px;
+    border: 2px solid #ff6b6b;
     border-radius: 20px;
     color: #ff6b6b;
     font-size: 14px;

@@ -21,24 +21,26 @@ class SellController extends Controller
     }
 
     public function store(ExhibitionRequest $request)
-{
-    DB::transaction(function () use ($request) {
-        $imagePath = $request->file('image')->store('items', 'public');
+    {
+        DB::transaction(function () use ($request) {
+            $imagePath = $request->file('image')->store('items', 'public');
 
-        $item = Item::create([
-            'user_id' => Auth::id(),
-            'condition_id' => $request->condition_id,
-            'name' => $request->name,
-            'brand_name' => $request->brand_name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'image' => $imagePath,
-            'is_sold' => 0,
-        ]);
+            $item = Item::create([
+                'user_id' => Auth::id(),
+                'condition_id' => $request->condition_id,
+                'name' => $request->name,
+                'brand_name' => $request->brand_name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'image' => $imagePath,
+                'is_sold' => 0,
+            ]);
 
-        $item->categories()->attach($request->category_ids);
-    });
+            $categoryIds = $request->input('category_ids', []);
 
-    return redirect()->route('items.index');
-}
+            $item->categories()->attach($categoryIds);
+        });
+
+        return redirect()->route('profile.show')->with('success', '商品を出品しました');
+    }
 }

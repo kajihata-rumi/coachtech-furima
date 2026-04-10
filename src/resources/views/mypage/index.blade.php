@@ -5,7 +5,11 @@
 @endsection
 
 @section('content')
-
+    @if (session('success'))
+        <div class="flash-message">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="mypage">
         <div class="mypage__header">
             <div class="mypage__profile">
