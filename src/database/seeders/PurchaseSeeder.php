@@ -29,7 +29,7 @@ class PurchaseSeeder extends Seeder
             [
                 'user_id' => 1,
                 'item_id' => 7,
-                'payment_method' => 'convenience',
+                'payment_method' => 'konbini',
                 'postal_code' => '150-0001',
                 'address' => '東京都渋谷区神宮前1-2-3',
                 'building' => 'テストマンション101',

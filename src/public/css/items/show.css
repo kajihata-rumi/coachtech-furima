@@ -421,8 +421,9 @@
 }
 
 .item-detail__sold-label {
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 700;
+    color: #ff5555;
 }
 
 .item-detail__purchase-link {

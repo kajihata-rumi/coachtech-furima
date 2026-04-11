@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Item;
+use Illuminate\Support\Facades\DB;
 
 class ItemSeeder extends Seeder
 {
@@ -11,6 +12,7 @@ class ItemSeeder extends Seeder
     {
         $items = [
             [
+                'id' => 1,
                 'user_id' => 1,
                 'name' => '腕時計',
                 'brand_name' => 'Rolax',
@@ -20,6 +22,7 @@ class ItemSeeder extends Seeder
                 'image' => 'items/watch.jpg',
             ],
             [
+                'id' => 2,
                 'user_id' => 1,
                 'name' => 'HDD',
                 'brand_name' => '西芝',
@@ -29,6 +32,7 @@ class ItemSeeder extends Seeder
                 'image' => 'items/hdd.jpg',
             ],
             [
+                'id' => 3,
                 'user_id' => 1,
                 'name' => '玉ねぎ3束',
                 'brand_name' => null,
@@ -38,6 +42,7 @@ class ItemSeeder extends Seeder
                 'image' => 'items/onion.jpg',
             ],
             [
+                'id' => 4,
                 'user_id' => 1,
                 'name' => '革靴',
                 'brand_name' => null,
@@ -47,6 +52,7 @@ class ItemSeeder extends Seeder
                 'image' => 'items/shoes.jpg',
             ],
             [
+                'id' => 5,
                 'user_id' => 1,
                 'name' => 'ノートPC',
                 'brand_name' => null,
@@ -56,6 +62,7 @@ class ItemSeeder extends Seeder
                 'image' => 'items/laptop.jpg',
             ],
             [
+                'id' => 6,
                 'user_id' => 2,
                 'name' => 'マイク',
                 'brand_name' => null,
@@ -65,6 +72,7 @@ class ItemSeeder extends Seeder
                 'image' => 'items/mic.jpg',
             ],
             [
+                'id' => 7,
                 'user_id' => 2,
                 'name' => 'ショルダーバッグ',
                 'brand_name' => null,
@@ -74,6 +82,7 @@ class ItemSeeder extends Seeder
                 'image' => 'items/shoulder-bag.jpg',
             ],
             [
+                'id' => 8,
                 'user_id' => 2,
                 'name' => 'タンブラー',
                 'brand_name' => null,
@@ -83,6 +92,7 @@ class ItemSeeder extends Seeder
                 'image' => 'items/tumbler.jpg',
             ],
             [
+                'id' => 9,
                 'user_id' => 2,
                 'name' => 'コーヒーミル',
                 'brand_name' => 'Starbacks',
@@ -92,6 +102,7 @@ class ItemSeeder extends Seeder
                 'image' => 'items/coffee-mill.jpg',
             ],
             [
+                'id' => 10,
                 'user_id' => 2,
                 'name' => 'メイクセット',
                 'brand_name' => null,
@@ -102,8 +113,6 @@ class ItemSeeder extends Seeder
             ],
         ];
 
-        foreach ($items as $item) {
-            Item::create($item);
-        }
+        DB::table('items')->insert($items);
     }
 }
