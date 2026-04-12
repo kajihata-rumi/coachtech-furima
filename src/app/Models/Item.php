@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Condition;
@@ -9,6 +10,7 @@ use App\Models\Purchase;
 
 class Item extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'user_id',
         'condition_id',
@@ -19,27 +21,22 @@ class Item extends Model
         'image',
         'is_sold',
     ];
-
     public function likes()
     {
         return $this->hasMany(Like::class);
     }
-
     public function purchase()
     {
         return $this->hasOne(Purchase::class);
     }
-
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'item_category')->withTimestamps();
     }
-
     public function condition()
     {
         return $this->belongsTo(Condition::class);
