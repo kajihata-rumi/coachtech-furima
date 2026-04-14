@@ -23,106 +23,90 @@ Laravelを使用して作成したフリマアプリです。
 - `docker-compose exec php bash`
 - `composer install`
 - `cp .env.example .env`
+- `.env` を設定
 - `php artisan key:generate`
-- `php artisan migrate`
-- `php artisan db:seed`
+- `php artisan migrate --seed`
 - `php artisan storage:link`
+- `php artisan test`
 
 ---
 
 ## .env 設定
 
-`.env` ファイルでは、以下のデータベース接続情報を設定してください。
+.envファイルでは、以下のデータベース接続情報を設定してください。
 
-```env
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=laravel_db
-DB_USERNAME=laravel_user
-DB_PASSWORD=laravel_pass
-```
+- `DB_CONNECTION=mysql`
+- `DB_HOST=mysql`
+- `DB_PORT=3306`
+- `DB_DATABASE=laravel_db`
+- `DB_USERNAME=laravel_user`
+- `DB_PASSWORD=laravel_pass`
+
+- `MAIL_MAILER=smtp`
+- `MAIL_HOST=mailhog`
+- `MAIL_PORT=1025`
+- `MAIL_USERNAME=null`
+- `MAIL_PASSWORD=null`
+- `MAIL_ENCRYPTION=null`
+- `MAIL_FROM_ADDRESS=test@example.com`
+- `MAIL_FROM_NAME="${APP_NAME}"`
+
+- `STRIPE_KEY=[ご自身の公開キー]`
+- `STRIPE_SECRET=[ご自身のシークレットキー]`
+
+※ Stripeのキーは各自で取得したテスト用キーを設定してください。
 
 ---
 
 ## Seederについて
 
 動作確認用としてSeederで初期データを登録しています。
+商品一覧・商品詳細・いいね・コメント・購入機能などの確認に使用できます。
 
 ### 登録内容
 
-- ユーザー2名
+- ユーザー3名
+  - testuser1
+    - 認証済み
+    - 住所あり
+  - testuser2
+    - 認証済み
+    - 住所なし
+  - testuser3
+    - 未認証
+
 - 商品データ10件
+  ・腕時計
+  ・HDD
+  ・玉ねぎ3束
+  ・革靴
+  ・ノートPC
+  ・マイク
+  ・ショルダーバッグ
+  ・タンブラー
+  ・コーヒーミル
+  ・メイクセット
 
 ### 補足
 
 - 新規ユーザーを作成した場合も機能は動作します。
 - 新規ユーザーに紐づく出品データ・購入データがない場合、マイページの一覧は空表示になります。
 
----
-
-## URL
-
-- 開発環境: `http://localhost/`
-- phpMyAdmin: `http://localhost:8080/`
-- 出品画面: `http://localhost/sell`
-- マイページ: `http://localhost/mypage`
-- プロフィール編集画面: `http://localhost/mypage/profile`
-
----
+--
 
 ## 使用技術（実行環境）
 
-- PHP 8.x
-- Laravel 8.x
+- PHP 8.1
+- Laravel 8.83.29
 - MySQL 8.0
-- nginx 1.21.x
-- Docker / Docker Compose
+- nginx 1.21.1
+- Docker
+- Docker Compose
+- MailHog
 
----
+## 外部サービス
 
-## 主な機能
-
-- 会員登録
-- ログイン
-- ログアウト
-- 商品一覧表示
-- 商品詳細表示
-- 商品出品
-- 商品画像アップロード
-- プロフィール編集
-- プロフィール画像アップロード
-- マイページ表示
-- いいね機能
-- コメント機能
-
----
-
-## 実装済み内容
-
-### 商品画像アップロード機能
-
-- 出品時に商品画像をアップロードできるように実装しています。
-- 商品画像は storage/app/public/items に保存しています。
-- 保存した画像は、商品一覧画面およびマイページで表示確認済みです。
-
-### プロフィール画像アップロード機能
-
-- プロフィール編集画面でプロフィール画像をアップロードできるように実装しています。
-- プロフィール画像は storage/app/public/profiles に保存しています。
-- 保存した画像は、プロフィール編集画面およびマイページで表示確認済みです。
-
----
-
-### バリデーション実装ファイル
-
-- ユーザー登録時: `src/app/Http/Requests/RegisterRequest.php`
-- ログイン時: `src/app/Http/Requests/Auth/LoginRequest.php`
-- コメント時: `src/app/Http/Requests/CommentRequest.php`
-- 支払時: `src/app/Http/Requests/PurchaseRequest.php`
-- 配送時: `src/app/Http/Requests/AddressRequest.php`
-- プロフィール登録時: `src/app/Http/Requests/ProfilesRequest.php`
-- 商品登録時: `src/app/Http/Requests/ExhibitionRequest.php`
+- Stripe
 
 ---
 
@@ -132,7 +116,83 @@ DB_PASSWORD=laravel_pass
 
 ---
 
-### コンビニ払いについて
+## URL
+
+- 開発環境: http://localhost/
+- phpMyAdmin: http://localhost:8080/
+- MailHog: http://localhost:8025/
+
+---
+
+## 主な機能
+
+### 実装済み内容
+
+- 会員登録
+- ログイン
+- ログアウト
+- メール認証
+- 商品一覧（おすすめ）表示
+  - マイリスト表示
+  - Sold表示
+- 商品検索
+- 商品詳細表示
+  - いいね追加 / 解除
+  - コメント送信
+  - 商品購入手続きへ
+- 商品購入手続き
+  - 支払い方法選択
+  - 配送先変更
+  - 購入後Stripe遷移（決済画面へ）
+- 商品出品
+  - 商品画像アップロード
+- プロフィール編集
+  - プロフィール画像アップロード
+- マイページ表示
+  - プロフィール画像
+  - ユーザー名
+  - 出品した商品一覧
+  - 購入した商品一覧
+
+---
+
+## メール認証確認手順
+
+本アプリではメール認証機能を実装しています。
+メール送信確認には MailHog を使用します。
+
+確認手順
+
+- 会員登録を行う
+- MailHog（http://localhost:8025/）にアクセスする
+- 認証メールを確認する
+- メール内の認証URLをクリックする
+- メール認証完了後、プロフィール設定画面へ遷移することを確認する
+
+---
+
+## Stripe決済機能について
+
+本アプリでは Stripe を利用した決済機能を実装しています。
+
+### テスト用カード決済
+
+以下のテストカード番号を使用してください。
+
+- カード番号: 4242 4242 4242 4242
+- 有効期限: 任意の未来日
+- CVC: 任意の3桁
+- 郵便番号: 任意
+
+確認内容
+
+- 商品購入ができること
+- 購入後、一覧画面で Sold 表示になること
+- Stripe画面へ遷移後はマイページに遷移すること
+  ![購入完了後の一覧画面](docs/purchase_complete.png)
+- マイページの購入商品一覧に反映されること
+
+### テスト用コンビニ払い
 
 実際の仕様では、コンビニでの店頭支払い完了後、確認が取れてから（タイムラグがあって）購入済みとして扱われます。
 一方、本模擬案件では Stripe のコンビニ決済画面への遷移確認が要件となっているため、アプリ側では購入導線の確認を優先し、Stripe画面へ遷移する前に purchases テーブルへ保存する実装としています。
@@ -142,19 +202,78 @@ DB_PASSWORD=laravel_pass
 - Stripe画面に遷移する前にDBへ保存
 - 商品一覧で Sold 表示
 - マイページ「購入した商品」タブへ反映
+- Stripe画面へ遷移後はマイページに遷移しない
+  ![Stripeコンビニ払い画面](docs/stripe_konbini_payment.png)
 
 ---
 
-### カテゴリについて
+## カテゴリについて
 
 カテゴリ情報は仕様書の商品データ一覧に記載がなかったため、
-アプリ確認用に任意で紐付けています。
+UI仕様書にある14種類から任意で紐付けています。
+
+---
+
+## 画像アップロード機能について
+
+- 画像選択時のプレビューは実装していません。
+- 登録後の画面で確認してください。
+
+### 商品画像アップロード
+
+- 出品時に商品画像をアップロードできるように実装しています。
+- 商品画像は storage/app/public/items に保存しています。
+- 保存した画像は、商品一覧画面およびマイページで表示確認済みです。
+
+### プロフィール画像アップロード
+
+- プロフィール編集画面でプロフィール画像をアップロードできるように実装しています。
+- プロフィール画像は storage/app/public/profiles に保存しています。
+- 保存した画像は、プロフィール編集画面およびマイページで表示確認済みです。
+
+補足
+画像表示には php artisan storage:link が必要です。
+
+---
+
+### バリデーション実装ファイル
+
+- 会員登録時: src/app/Http/Requests/RegisterRequest.php
+- ログイン時: src/app/Http/Requests/Auth/LoginRequest.php
+- コメント時: src/app/Http/Requests/CommentRequest.php
+- 配送先入力時: src/app/Http/Requests/PurchaseRequest.php
+- 住所変更時: src/app/Http/Requests/AddressRequest.php
+- プロフィール登録時: src/app/Http/Requests/ProfilesRequest.php
+- 商品登録時: src/app/Http/Requests/ExhibitionRequest.php
+
+---
+
+## PHPUnit Featureテスト
+
+- php artisan test
+
+今回作成した主なFeatureテスト
+
+- 会員登録機能 → RegisterTest.php
+- ログイン機能 → LoginTest.php
+- ログアウト機能 → LogoutTest.php
+- 商品一覧取得 → ItemListTest.php
+- マイリスト一覧取得 → MylistIndexTest.php
+- 商品検索機能 → ItemSearchTest.php
+- 商品詳細情報取得 → ItemDetailTest.php
+- いいね機能 → LikeToggleTest.php
+- コメント送信機能 → CommentTest.php
+- 商品購入機能 → PurchaseFlowTest.php
+- 支払い方法選択機能 → PurchasePaymentMethodTest.php
+- 配送先変更機能 → PurchaseAddressChangeTest.php
+- ユーザー情報取得 → UserProfileTest.php
+- ユーザー情報変更 → ProfileUpdateTest.php
+- 出品商品情報登録 → SellItemTest.php
+- メール認証機能 → EmailVerificationFlowTest.php
+  ※ 上記の機能ごとに、正常系・異常系・バリデーションを含むFeatureテストを実施しています。
 
 ---
 
 ## 注意事項
 
-- 画像表示を行うため、`php artisan storage:link` の実行が必要です。
-- Seeder実行前提で動作確認を行っています。
-- 新規ユーザーでは、初期状態のマイページ一覧が空になる場合があります。
-- プロフィール画面内の商品一覧から商品詳細画面への遷移は、仕様書に明記がなかったため未実装です。
+- マイページ内の商品一覧から商品詳細画面への遷移は、仕様書に明記がなかったため実装していません。
