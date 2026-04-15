@@ -36,16 +36,23 @@
             </a>
         </div>
 
-
         <div class="mypage__items">
             @forelse ($items as $item)
                 <div class="mypage__item">
                     <div class="mypage__item-image">
                         @if (!empty($item->image))
-                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="mypage__item-image">
+                            <a href="{{ route('items.show', ['item_id' => $item->id]) }}">
+                                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
+                                    class="mypage__item-image">
+                            </a>
                         @endif
                     </div>
-                    <p class="mypage__item-name">{{ $item->name }}</p>
+
+                    <p class="mypage__item-name">
+                        <a href="{{ route('items.show', ['item_id' => $item->id]) }}" class="mypage__item-name-link">
+                            {{ $item->name }}
+                        </a>
+                    </p>
                 </div>
             @empty
                 <p class="mypage__empty">商品がありません</p>
