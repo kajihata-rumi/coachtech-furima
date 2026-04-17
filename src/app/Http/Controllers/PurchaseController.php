@@ -57,13 +57,13 @@ public function checkout(PurchaseRequest $request, Item $item)
     if ($item->purchase) {
         return redirect()
             ->route('items.show', ['item_id' => $item->id])
-            ->with('error', '売り切れの商品です。');
+            ->with('error', '売り切れのため購入できません。');
     }
 
     if ($item->user_id === auth()->id()) {
         return redirect()
             ->route('items.show', ['item_id' => $item->id])
-            ->with('error', '自分の商品は購入できません。');
+            ->with('error', '自分で出品した商品は購入できません。');
     }
 
 if (app()->environment('testing')) {

@@ -41,7 +41,8 @@ php artisan storage:link
 
 ## .env 設定
 
-.envファイルでは、以下のデータベース接続情報を設定してください。
+`.env.example` を `.env` にコピーした後、以下を設定してください。
+`DB_HOST=127.0.0.1` のままだと Docker 環境で接続できません。
 
 ```env
 DB_CONNECTION=mysql
