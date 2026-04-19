@@ -39,6 +39,7 @@ class ProfileRequest extends FormRequest
             'image.image' => '画像ファイルを選択してください。',
             'image.mimes' => '画像はjpegまたはpng形式でアップロードしてください。',
             'image.max' => '画像サイズは2MB以下にしてください。',
+            'image.uploaded' => 'プロフィール画像のアップロードに失敗しました。',
         ];
     }
 }

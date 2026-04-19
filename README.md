@@ -135,6 +135,13 @@ STRIPE_SECRET=ご自身のシークレットキー
 
 ![ER図](docs/er.png)
 
+本アプリでは、users と items を中心に、出品・購入・いいね・コメントの情報を管理しています。
+1人のユーザーは複数の商品を出品できるため、users と items は1対多の関係です。
+categories と items は多対多の関係なので、中間テーブルとして item_category を設けています。
+これにより、1つの商品に複数カテゴリを紐づけることができます。
+purchases テーブルでは購入者・支払い方法・配送先を管理し、item_id に UNIQUE 制約を設けることで同一商品の重複購入を防いでいます。
+likes テーブルにも UNIQUE 制約を設け、同一ユーザーが同じ商品に重複していいねできない設計です。
+
 ---
 
 ## URL
@@ -328,3 +335,24 @@ php artisan test
 - メール認証機能 → `EmailVerificationFlowTest.php`
 
 ※ 上記の機能ごとに、正常系・異常系・バリデーションを含むFeatureテストを実施しています。
+
+---
+
+## 動作確認・追加検証
+
+### 1000人データテスト
+
+- 1000人データを追加投入した状態で、正常に動作することを確認（usersテーブル 1004件：既存4件 + 追加1000件）
+- 検証用Seeder: `LargeScaleUserSeeder`
+- 実行コマンド: `php artisan db:seed --class=Database\\Seeders\\LargeScaleUserSeeder`
+- `phpMyAdmin` 画面
+- ![1000人追加後のusers件数確認](docs/users_1004_laravel_db.png)
+- ログイン前の一商品一覧画面
+  ![ログイン前商品一覧](docs/guest_item_list_1000_test.png)
+- ログイン後マイリスト画面（検索結果保持）
+  ![ログイン後マイリスト](docs/mylist_keyword_persist_1000_test.png)
+- 検証後は `php artisan migrate:fresh --seed` により初期状態へ復元
+
+### ブラウザテスト
+
+- Chrome / Safari / Firefox の3ブラウザで主要画面の表示確認を実施
