@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/items/show.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/items/show.css') }}?v={{ filemtime(public_path('css/items/show.css')) }}">
 @endsection
 
 @section('content')

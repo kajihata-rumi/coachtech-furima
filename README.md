@@ -214,6 +214,7 @@ likes テーブルにも UNIQUE 制約を設け、同一ユーザーが同じ商
 - 会員登録を行う
 - MailHog（http://localhost:8025/）にアクセスする
 - 認証メールを確認する
+  ![認証メールの内容画面](docs/mailhog-verification-email.png)
 - メール内の認証URLをクリックする
 - メール認証完了後、プロフィール設定画面へ遷移することを確認する
 
@@ -355,4 +356,31 @@ php artisan test
 
 ### ブラウザテスト
 
-- Chrome / Safari / Firefox の3ブラウザで主要画面の表示確認を実施
+- 以下のブラウザで表示確認を行いました。
+
+- Google Chrome
+- Apple Safari
+- Mozilla Firefox
+
+#### 確認内容
+
+- 商品一覧画面
+  ![Chrome](docs/browser-check-chrome-item-list.png)
+  ![Safari](docs/browser-check-safari-item-list.png)
+  ![Firefox](docs/browser-check-firefox-item-list.png)
+- 商品詳細画面
+- 商品購入画面
+- 商品出品画面
+- ログイン画面
+  ![Chrome](docs/browser-check-chrome-login.png)
+  ![Safari](docs/browser-check-safari-login.png)
+  ![Firefox](docs/browser-check-firefox-login.png)
+- 会員登録画面
+- マイページ画面
+
+#### 確認結果
+
+- レイアウト崩れなし
+- 文字表示の差異を修正済み
+- ボタン・リンク動作OK
+- フォーム入力・送信OK

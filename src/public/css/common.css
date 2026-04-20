@@ -104,3 +104,30 @@
     color: #000;
     text-decoration: none;
 }
+
+body {
+    font-family:
+        "Hiragino Sans",
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        "YuGothic",
+        "Helvetica Neue",
+        Arial,
+        Meiryo,
+        sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    font-family: inherit;
+}
+
+a,
+.header__link,
+.header__logout-button,
+.header__button {
+    font-family: inherit;
+}
