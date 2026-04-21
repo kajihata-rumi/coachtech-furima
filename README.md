@@ -179,7 +179,7 @@ likes テーブルにも UNIQUE 制約を設け、同一ユーザーが同じ商
   - 支払い方法選択
   - 配送先表示・変更
   - 購入後Stripe遷移（決済画面へ）
-  - カードで購入完了時に成功メッセージを表示
+  - カードで購入完了時に完了メッセージを表示
 - 商品出品
   - 商品画像アップロード
   - 商品カテゴリー：14種類から選択
@@ -188,14 +188,14 @@ likes テーブルにも UNIQUE 制約を設け、同一ユーザーが同じ商
   - ブランド名
   - 商品の説明
   - 販売価格
-  - 出品完了時に成功メッセージを表示
+  - 出品完了時にメッセージを表示
 - プロフィール編集
   - プロフィール画像アップロード
   - ユーザー名
   - 郵便番号
   - 住所
   - 建物名
-  - 更新完了時に成功メッセージを表示
+  - 更新完了時に更新メッセージを表示
 - マイページ表示
   - プロフィール画像
   - ユーザー名
@@ -359,22 +359,22 @@ php artisan test
 - 以下のブラウザで表示確認を行いました。
 
 - Google Chrome
-- Apple Safari
 - Mozilla Firefox
+- Apple Safari
 
 #### 確認内容
 
 - 商品一覧画面
   ![Chrome](docs/browser-check-chrome-item-list.png)
-  ![Safari](docs/browser-check-safari-item-list.png)
   ![Firefox](docs/browser-check-firefox-item-list.png)
+  ![Safari](docs/browser-check-safari-item-list.png)
 - 商品詳細画面
 - 商品購入画面
 - 商品出品画面
 - ログイン画面
   ![Chrome](docs/browser-check-chrome-login.png)
-  ![Safari](docs/browser-check-safari-login.png)
   ![Firefox](docs/browser-check-firefox-login.png)
+  ![Safari](docs/browser-check-safari-login.png)
 - 会員登録画面
 - マイページ画面
 
